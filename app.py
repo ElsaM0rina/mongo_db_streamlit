@@ -7,7 +7,7 @@ load_dotenv()
 uri = os.getenv("MONGO_URI")
 
 # Create a new client and connect to the server
-client = MongoClient("mongodb+srv://3jrmvsjsg777_db_user:t9bTGdgKGpJmpIdP@cluster0.bo1sggf.mongodb.net/?appName=Cluster0")
+client = MongoClient(uri) #MongoClient("mongodb+srv://3jrmvsjsg777_db_user:t9bTGdgKGpJmpIdP@cluster0.bo1sggf.mongodb.net/?appName=Cluster0")
 
 # Send a ping to confirm a successful connection
 try:
