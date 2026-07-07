@@ -1,20 +1,21 @@
-import os
-from dotenv import load_dotenv
+import streamlit as st 
 from pymongo import MongoClient
 
+st.title("Sample MongoDB :sunglasses:")
 
-load_dotenv()
+uri = st.secrets["MONGO_URI_ST"]
 
-uri = os.getenv("MONGO_URI")
+server = MongoClient(uri)
+server.admin.command("ping")
 
-# Create a new client and connect to the server
-client = MongoClient(uri) #MongoClient("mongodb+srv://3jrmvsjsg777_db_user:t9bTGdgKGpJmpIdP@cluster0.bo1sggf.mongodb.net/?appName=Cluster0")
+db = server["name_tacker"]
+collection = db["usernames"]
 
-# Send a ping to confirm a successful connection
-try:
-    client.admin.command('ping')
-    print("Pinged your deployment. You successfully connected to MongoDB!")
-except Exception as e:
-    print(e)
+st.success("DB connection done branch!")
 
+name = st.text_input("User name", "Filani")
+
+if name:
+    st.write(f"The current user name is **{name}**")
+    collection.insert_one({"user_name": name})
 
